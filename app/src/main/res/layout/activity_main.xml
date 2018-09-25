@@ -7,18 +7,18 @@
 
 		<variable
 			name="view"
-			type="io.futured.gifomat2.MainView"/>
+			type="io.futured.gifomat2.ui.main.MainView"/>
 
 		<variable
 			name="viewmodel"
-			type="io.futured.gifomat2.MainViewModel"/>
+			type="io.futured.gifomat2.ui.main.MainViewModel"/>
 
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:context=".MainActivity">
+		tools:context=".ui.main.MainActivity">
 
 		<com.otaliastudios.cameraview.CameraView
 			android:id="@+id/camera_view"

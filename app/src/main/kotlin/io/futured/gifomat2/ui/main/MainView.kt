@@ -1,4 +1,4 @@
-package io.futured.gifomat2
+package io.futured.gifomat2.ui.main
 
 interface MainView {
 

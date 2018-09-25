@@ -39,54 +39,59 @@ android {
 //    }
 }
 
+ext.constraintlayout_version = "2.0.0-alpha2"
+ext.cameraview_version = "1.6.0"
+ext.exifinterface_version = "1.0.0"
+ext.koin_version = "1.0.1"
+ext.lifecycle_version = '2.0.0'
+ext.retrofit_version = '2.4.0'
+ext.okhttp_version = '3.11.0'
+ext.timber_version = "4.7.0"
+ext.rx_kotlin_version = "2.2.0"
+ext.rx_android_version = "2.0.2"
+ext.rx_java_version = "2.2.0"
+ext.rx_relay_version = "2.0.0"
+ext.interactors_version = "3.0.0-kotlin-beta11"
+
 dependencies {
-    def lifecycle_version = "2.0.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     compileOnly 'com.google.android.things:androidthings:+'
 
-    final CONSTRAINT_LAYOUT = '2.0.0-alpha2'
-    final RX_KOTLIN = '2.2.0'
-    final RX_ANDROID = '2.0.2'
-    final RX_JAVA = '2.2.0'
-    final RX_RELAY = '2.0.0'
-    final TASTE = '3.0.0-kotlin-beta11'
-    final RETROFIT = '2.4.0'
-    final OKHTTP = '3.11.0'
-    final MOSHI = '1.6.0'
-    final TIMBER = '4.7.0'
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     // Ui
-    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT"
-    implementation 'com.otaliastudios:cameraview:1.6.0'
-    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "com.otaliastudios:cameraview:$cameraview_version"
+    implementation "androidx.exifinterface:exifinterface:$exifinterface_version"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+    // DI
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
     // RxJava
-//    implementation "io.reactivex.rxjava2:rxkotlin:$RX_KOTLIN"
-//    implementation "io.reactivex.rxjava2:rxandroid:$RX_ANDROID"
-//    implementation "io.reactivex.rxjava2:rxjava:$RX_JAVA"
-//    implementation "com.jakewharton.rxrelay2:rxrelay:$RX_RELAY"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rx_relay_version"
 
     // Interactors
-//    implementation "com.github.thefuntasty.taste:interactors-rxjava2:$TASTE"
+    implementation "com.github.thefuntasty.taste:interactors-rxjava2:$interactors_version"
 
     // Networking
-//    implementation "com.squareup.retrofit2:retrofit:$RETROFIT"
-//    implementation "com.squareup.retrofit2:converter-moshi:$RETROFIT"
-//    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT"
-//    implementation "com.squareup.okhttp3:okhttp:$OKHTTP"
-//    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP"
-//    implementation "com.squareup.moshi:moshi:$MOSHI"
-//    implementation "com.squareup.moshi:moshi-kotlin:$MOSHI"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     // Other
-    implementation "com.jakewharton.timber:timber:$TIMBER"
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

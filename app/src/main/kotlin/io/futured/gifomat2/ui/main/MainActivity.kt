@@ -3,31 +3,15 @@ package io.futured.gifomat2.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.otaliastudios.cameraview.Audio
 import com.otaliastudios.cameraview.CameraListener
+import com.otaliastudios.cameraview.SessionType
+import com.otaliastudios.cameraview.VideoQuality
 import io.futured.gifomat2.R
 import io.futured.gifomat2.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
-/**
- * Skeleton of an Android Things activity.
- *
- * Android Things peripheral APIs are accessible through the class
- * PeripheralManagerService. For example, the snippet below will open a GPIO pin and
- * set it to HIGH:
- *
- * <pre>{@code
- * val service = PeripheralManagerService()
- * val mLedGpio = service.openGpio("BCM6")
- * mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
- * mLedGpio.value = true
- * }</pre>
- * <p>
- * For more complex peripherals, look for an existing user-space driver, or implement one if none
- * is available.
- *
- * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
- *
- */
 class MainActivity : AppCompatActivity(), MainView {
 
     lateinit var binding: ActivityMainBinding
@@ -43,14 +27,30 @@ class MainActivity : AppCompatActivity(), MainView {
         binding.view = this
 
         binding.cameraView.setLifecycleOwner(this)
+        binding.cameraView.sessionType = SessionType.VIDEO
         binding.cameraView.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(jpeg: ByteArray?) {
                 jpeg?.let { viewModel.onImageCaptured(it) }
+            }
+
+            override fun onVideoTaken(video: File?) {
+                video?.let { viewModel.onVideoCaptured(it) }
             }
         })
     }
 
     override fun onCaptureClick() {
+        binding.cameraView.sessionType = SessionType.PICTURE
         binding.cameraView.captureSnapshot()
+    }
+
+    override fun onGifCaptureClick() {
+        binding.cameraView.sessionType = SessionType.VIDEO
+        binding.cameraView.audio = Audio.OFF
+        binding.cameraView.videoQuality = VideoQuality.MAX_480P
+        binding.cameraView.videoMaxDuration = 2000
+
+        val file = File(externalCacheDir, "vid-${System.currentTimeMillis()}").apply { createNewFile() }
+        binding.cameraView.startCapturingVideo(file)
     }
 }

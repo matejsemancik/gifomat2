@@ -14,14 +14,16 @@ class UploadSlackFileCompletabler constructor(
 
     lateinit var channel: String
     lateinit var file: File
+    lateinit var mimeType: String
 
-    fun init(channel: String, file: File) = apply {
+    fun init(channel: String, file: File, mime: String) = apply {
         this.channel = channel
         this.file = file
+        this.mimeType = mime
     }
 
     override fun build(): Completable {
-        val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+        val requestFile = RequestBody.create(MediaType.parse(mimeType), file)
         return slackService.uploadSlackFile(
                 MultipartBody.Part.createFormData("file", file.name, requestFile),
                 RequestBody.create(MultipartBody.FORM, channel)

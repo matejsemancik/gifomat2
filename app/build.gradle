@@ -34,6 +34,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.2'
+    }
+
 //    androidExtensions {
 //        experimental = true
 //    }
@@ -94,4 +98,7 @@ dependencies {
 
     // Other
     implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation 'org.jcodec:jcodec:0.2.3'
+    implementation 'org.jcodec:jcodec-android:0.2.3'
+    implementation 'com.waynejo:androidndkgif:0.3.3'
 }

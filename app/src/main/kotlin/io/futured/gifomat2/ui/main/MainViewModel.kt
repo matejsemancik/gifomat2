@@ -1,7 +1,7 @@
 package io.futured.gifomat2.ui.main
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.futured.gifomat2.domain.gif.EncodeGifSingler
 import io.futured.gifomat2.domain.image.DecodeImageSingler
 import io.futured.gifomat2.domain.slack.SendSlackMessageCompletabler
 import io.futured.gifomat2.domain.slack.UploadSlackFileCompletabler
@@ -11,13 +11,12 @@ import java.io.File
 class MainViewModel constructor(
         val sendSlackMessageCompletabler: SendSlackMessageCompletabler,
         val decodeImageSingler: DecodeImageSingler,
-        val uploadSlackFileCompletabler: UploadSlackFileCompletabler
+        val uploadSlackFileCompletabler: UploadSlackFileCompletabler,
+        val encodeGifSingler: EncodeGifSingler
 ) : ViewModel() {
 
-    val title: MutableLiveData<String> = MutableLiveData()
-
     init {
-        title.value = "Hello zmrd!"
+
     }
 
     fun onImageCaptured(bytes: ByteArray) {
@@ -29,7 +28,25 @@ class MainViewModel constructor(
 
     fun sendImage(file: File) {
         uploadSlackFileCompletabler
-                .init("gifomat", file)
+                .init("gifomat", file, "image/jpeg")
+                .execute(
+                        { Timber.d("Success") },
+                        { Timber.e(it) }
+                )
+    }
+
+    fun onVideoCaptured(videoFile: File) {
+        encodeGifSingler
+                .init(videoFile)
+                .execute(
+                        { sendGif(it) },
+                        { Timber.e(it) }
+                )
+    }
+
+    fun sendGif(file: File) {
+        uploadSlackFileCompletabler
+                .init("gifomat", file, "image/gif")
                 .execute(
                         { Timber.d("Success") },
                         { Timber.e(it) }

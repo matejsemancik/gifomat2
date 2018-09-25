@@ -22,28 +22,65 @@
 		<com.otaliastudios.cameraview.CameraView
 			android:id="@+id/camera_view"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			app:cameraAudio="off"
-			app:cameraVideoQuality="max480p"
+			android:layout_height="590dp"
 			android:layout_gravity="center"
+			app:cameraAudio="off"
 			app:cameraPlaySounds="false"
 			app:cameraSessionType="video"
-			app:cameraVideoMaxDuration="2000"/>
+			app:cameraVideoMaxDuration="2000"
+			app:cameraVideoQuality="max480p"/>
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			tools:context=".ui.main.MainActivity">
 
-			<Button
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="100dp"
+				android:alpha="0.5"
+				android:background="@drawable/gradient_black"/>
+
+			<ImageView
+				android:id="@+id/imageView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="32dp"
-				android:layout_marginEnd="32dp"
+				android:src="@drawable/ic_slack"
+				app:layout_constraintBottom_toBottomOf="@+id/textView"
+				app:layout_constraintEnd_toStartOf="@+id/textView"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintHorizontal_chainStyle="packed"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/textView"/>
+
+			<TextView
+				android:id="@+id/textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="24dp"
+				android:includeFontPadding="false"
+				android:text="#gifomat"
+				android:textSize="32sp"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintStart_toEndOf="@+id/imageView"
+				app:layout_constraintTop_toTopOf="parent"/>
+
+			<Button
+				android:id="@+id/button"
+				style="@style/AppTheme.CaptureButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="24dp"
+				android:layout_marginEnd="8dp"
+				android:layout_marginStart="8dp"
 				android:onClick="@{() -> view.onGifCaptureClick()}"
-				android:text="Capture GIF"
+				android:text="Make a GIF"
 				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"/>
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"/>
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 

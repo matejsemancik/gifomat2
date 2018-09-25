@@ -18,7 +18,7 @@ class MainViewModel constructor(
 
     fun onVideoCaptureStart() {
         captureButtonEnabled.value = false
-        captureButtonText.value = "Recording..."
+        captureButtonText.value = "Recording..." // hackaton code lol, ain't nobody got time to write strings
         isCaptureButtonRecording.value = true
     }
 

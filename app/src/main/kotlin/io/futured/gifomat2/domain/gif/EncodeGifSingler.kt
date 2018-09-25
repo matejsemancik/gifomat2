@@ -23,14 +23,13 @@ class EncodeGifSingler constructor(private val cacheDir: File) : BaseSingler<Fil
         return Single
                 .fromCallable {
                     val startSec = 0.0
-                    val frameCount = 30
 
                     val grab = FrameGrab.createFrameGrab(NIOUtils.readableChannel(videoFile))
                     grab.seekToSecondPrecise(startSec)
 
                     val bitmaps = mutableListOf<Bitmap>()
 
-                    for (i in 0 until frameCount) {
+                    for (i in 0 until grab.videoTrack.meta.totalFrames) {
                         val picture = grab.nativeFrame
                         val bitmap = AndroidUtil.toBitmap(picture).apply {
                             val tmpfile = File(cacheDir, "frame-${i + System.currentTimeMillis()}.jpeg").apply { createNewFile() }

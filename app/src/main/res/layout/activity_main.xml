@@ -27,7 +27,7 @@
 			app:cameraAudio="off"
 			app:cameraPlaySounds="false"
 			app:cameraSessionType="video"
-			app:cameraVideoMaxDuration="2000"
+			app:cameraVideoMaxDuration="3000"
 			app:cameraVideoQuality="max480p"/>
 
 		<androidx.constraintlayout.widget.ConstraintLayout

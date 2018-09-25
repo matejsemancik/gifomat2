@@ -20,7 +20,7 @@ import java.io.File
 fun koinModules() = arrayListOf(appModule, interactorModule, networkModule)
 
 val appModule = module {
-    viewModel { MainViewModel(get(), get(), get(), get()) }
+    viewModel { MainViewModel(get(), get()) }
     single { androidContext().externalCacheDir } bind File::class
 }
 

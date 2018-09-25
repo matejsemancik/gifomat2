@@ -26,7 +26,7 @@ val interactorModule = module {
 val networkModule = module {
     single {
         val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.HEADERS
+        logger.level = HttpLoggingInterceptor.Level.BASIC
 
         Retrofit.Builder()
                 .baseUrl("https://slack.com/api/")

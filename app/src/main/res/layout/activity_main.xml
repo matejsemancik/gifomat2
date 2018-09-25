@@ -15,41 +15,37 @@
 
 	</data>
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		tools:context=".ui.main.MainActivity">
+		android:layout_height="match_parent">
 
 		<com.otaliastudios.cameraview.CameraView
 			android:id="@+id/camera_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			app:cameraPlaySounds="true"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"/>
+			app:cameraAudio="off"
+			app:cameraVideoQuality="max480p"
+			android:layout_gravity="center"
+			app:cameraPlaySounds="false"
+			app:cameraSessionType="video"
+			app:cameraVideoMaxDuration="2000"/>
 
-		<Button
-			android:id="@+id/button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="32dp"
-			android:layout_marginEnd="32dp"
-			android:onClick="@{() -> view.onCaptureClick()}"
-			android:text="Capture JPEG"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"/>
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".ui.main.MainActivity">
 
-		<Button
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="32dp"
-			android:layout_marginEnd="16dp"
-			android:onClick="@{() -> view.onGifCaptureClick()}"
-			android:text="Capture GIF"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toStartOf="@+id/button"/>
+			<Button
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="32dp"
+				android:layout_marginEnd="32dp"
+				android:onClick="@{() -> view.onGifCaptureClick()}"
+				android:text="Capture GIF"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"/>
 
-	</androidx.constraintlayout.widget.ConstraintLayout>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</FrameLayout>
 </layout>

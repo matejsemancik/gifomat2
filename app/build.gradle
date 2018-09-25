@@ -63,6 +63,7 @@ dependencies {
     // Ui
     implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT"
     implementation 'com.otaliastudios:cameraview:1.6.0'
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"

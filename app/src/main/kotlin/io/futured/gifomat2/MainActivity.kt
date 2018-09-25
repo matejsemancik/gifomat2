@@ -34,5 +34,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewmodel = viewModel
+
+        binding.cameraView.setLifecycleOwner(this)
     }
 }

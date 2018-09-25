@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.otaliastudios.cameraview.CameraListener
-import com.otaliastudios.cameraview.CameraUtils
 import io.futured.gifomat2.R
 import io.futured.gifomat2.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,15 +45,7 @@ class MainActivity : AppCompatActivity(), MainView {
         binding.cameraView.setLifecycleOwner(this)
         binding.cameraView.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(jpeg: ByteArray?) {
-//                Timber.d("Captured picture")
-
-                val startMillis = System.currentTimeMillis()
-                CameraUtils.decodeBitmap(jpeg) {
-                    val endMillis = System.currentTimeMillis()
-//                    Timber.d("Decoded, took ${endMillis - startMillis} ms")
-                }
-
-                viewModel.onImageCaptured()
+                jpeg?.let { viewModel.onImageCaptured(it) }
             }
         })
     }

@@ -2,7 +2,9 @@ package io.futured.gifomat2.di
 
 import io.futured.gifomat2.R
 import io.futured.gifomat2.domain.SlackService
+import io.futured.gifomat2.domain.image.DecodeImageSingler
 import io.futured.gifomat2.domain.slack.SendSlackMessageCompletabler
+import io.futured.gifomat2.domain.slack.UploadSlackFileCompletabler
 import io.futured.gifomat2.ui.main.MainViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,15 +14,19 @@ import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import java.io.File
 
 fun koinModules() = arrayListOf(appModule, interactorModule, networkModule)
 
 val appModule = module {
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get(), get()) }
+    single { androidContext().externalCacheDir } bind File::class
 }
 
 val interactorModule = module {
     factory { SendSlackMessageCompletabler(get()) }
+    factory { DecodeImageSingler(get()) }
+    factory { UploadSlackFileCompletabler(get()) }
 }
 
 val networkModule = module {

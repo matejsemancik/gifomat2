@@ -16,6 +16,16 @@ class MainViewModel constructor(
     }
 
     fun onImageCaptured() {
+        sendSlackMessageCompletabler
+                .init("gifomat", "Network module initialized.", true)
+                .execute(
+                        {
+
+                        },
+                        {
+                            Timber.e(it)
+                        }
+                )
         Timber.d("Img captured")
     }
 }

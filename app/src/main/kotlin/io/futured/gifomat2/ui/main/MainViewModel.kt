@@ -1,5 +1,6 @@
 package io.futured.gifomat2.ui.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.futured.gifomat2.domain.gif.EncodeGifSingler
 import io.futured.gifomat2.domain.slack.UploadSlackFileCompletabler
@@ -11,16 +12,30 @@ class MainViewModel constructor(
         val encodeGifSingler: EncodeGifSingler
 ) : ViewModel() {
 
-    init {
+    val captureButtonEnabled: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply { value = true }
+    val captureButtonText: MutableLiveData<String> = MutableLiveData<String>().apply { value = "Make a GIF" }
+    val isCaptureButtonRecording: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply { value = false }
 
+    fun onVideoCaptureStart() {
+        captureButtonEnabled.value = false
+        captureButtonText.value = "Recording..."
+        isCaptureButtonRecording.value = true
     }
 
     fun onVideoCaptured(videoFile: File) {
+        captureButtonText.postValue("Processing GIF...")
+        isCaptureButtonRecording.postValue(false)
+
         encodeGifSingler
                 .init(videoFile)
                 .execute(
-                        { sendGif(it) },
-                        { Timber.e(it) }
+                        {
+                            captureButtonText.value = "Uploading..."
+                            sendGif(it)
+                        },
+                        {
+                            Timber.e(it)
+                        }
                 )
     }
 
@@ -28,8 +43,15 @@ class MainViewModel constructor(
         uploadSlackFileCompletabler
                 .init("gifomat-dev", file, "image/gif")
                 .execute(
-                        { Timber.d("Success") },
-                        { Timber.e(it) }
+                        {
+                            captureButtonText.value = "Make a GIF"
+                            captureButtonEnabled.value = true
+                        },
+                        {
+                            captureButtonText.value = "Make a GIF"
+                            captureButtonEnabled.value = true
+                            Timber.e(it)
+                        }
                 )
     }
 }

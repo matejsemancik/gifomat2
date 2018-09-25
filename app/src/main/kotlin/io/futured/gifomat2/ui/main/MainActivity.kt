@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.viewmodel = viewModel
+        binding.viewModel = viewModel
         binding.view = this
+        binding.setLifecycleOwner(this)
 
         binding.cameraView.apply {
             setLifecycleOwner(this@MainActivity)
@@ -38,5 +39,6 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onGifCaptureClick() {
         val file = File(externalCacheDir, "vid-${System.currentTimeMillis()}").apply { createNewFile() }
         binding.cameraView.startCapturingVideo(file)
+        viewModel.onVideoCaptureStart()
     }
 }

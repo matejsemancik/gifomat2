@@ -10,7 +10,7 @@
 			type="io.futured.gifomat2.ui.main.MainView"/>
 
 		<variable
-			name="viewmodel"
+			name="viewModel"
 			type="io.futured.gifomat2.ui.main.MainViewModel"/>
 
 	</data>
@@ -76,11 +76,16 @@
 				android:layout_marginBottom="24dp"
 				android:layout_marginEnd="8dp"
 				android:layout_marginStart="8dp"
+				android:drawablePadding="8dp"
+				android:drawableStart='@{viewModel.isCaptureButtonRecording == true ? @drawable/ic_record : null}'
+				android:enabled="@{viewModel.captureButtonEnabled}"
 				android:onClick="@{() -> view.onGifCaptureClick()}"
-				android:text="Make a GIF"
+				android:text="@{viewModel.captureButtonText}"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toStartOf="parent"/>
+				app:layout_constraintStart_toStartOf="parent"
+				tools:enabled="false"
+				tools:text="Make a GIF"/>
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 

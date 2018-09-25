@@ -1,7 +1,10 @@
 package io.futured.gifomat2
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import io.futured.gifomat2.databinding.ActivityMainBinding
 
 /**
  * Skeleton of an Android Things activity.
@@ -23,10 +26,13 @@ import android.os.Bundle
  * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
  *
  */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding.viewmodel = viewModel
     }
 }

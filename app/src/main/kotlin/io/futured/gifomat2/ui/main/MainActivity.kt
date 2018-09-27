@@ -41,4 +41,8 @@ class MainActivity : AppCompatActivity(), MainView {
         binding.cameraView.startCapturingVideo(file)
         viewModel.onVideoCaptureStart()
     }
+
+    override fun onCloseClick() {
+        finish()
+    }
 }

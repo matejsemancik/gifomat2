@@ -68,14 +68,24 @@
 				app:layout_constraintStart_toEndOf="@+id/imageView"
 				app:layout_constraintTop_toTopOf="parent"/>
 
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="24dp"
+				android:clickable="true"
+				android:focusable="true"
+				android:onClick="@{() -> view.onCloseClick()}"
+				android:src="@drawable/ic_close"
+				android:stateListAnimator="@animator/sl_animator_button"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"/>
+
 			<Button
 				android:id="@+id/button"
 				style="@style/AppTheme.CaptureButton"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="24dp"
-				android:layout_marginEnd="8dp"
-				android:layout_marginStart="8dp"
 				android:drawablePadding="8dp"
 				android:drawableStart='@{viewModel.isCaptureButtonRecording == true ? @drawable/ic_record : null}'
 				android:enabled="@{viewModel.captureButtonEnabled}"

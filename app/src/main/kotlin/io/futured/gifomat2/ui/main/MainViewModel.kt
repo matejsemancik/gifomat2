@@ -41,7 +41,7 @@ class MainViewModel constructor(
 
     fun sendGif(file: File) {
         uploadSlackFileCompletabler
-                .init("gifomat", file, "image/gif")
+                .init("gifomat-dev", file, "image/gif")
                 .execute(
                         {
                             captureButtonText.value = "Make a GIF"

@@ -7,7 +7,6 @@ import com.otaliastudios.cameraview.CameraListener
 import io.futured.gifomat2.R
 import io.futured.gifomat2.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import java.io.File
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         binding.viewModel = viewModel
         binding.view = this
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.cameraView.apply {
             setLifecycleOwner(this@MainActivity)
@@ -31,8 +30,6 @@ class MainActivity : AppCompatActivity(), MainView {
                     video?.let { viewModel.onVideoCaptured(it) }
                 }
             })
-
-            Timber.d(cameraOptions.toString())
         }
     }
 
